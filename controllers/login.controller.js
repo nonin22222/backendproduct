@@ -18,7 +18,7 @@ module.exports.login = async (req, res) => {
       const password = req.body.password
       
       //เช็คว่า user นี้มีในระบบไหม
-      const user = await User.findOne({username:req.body.username})
+      const user = await User.findOne({username:username})
     
       let bcryptpassword
      
