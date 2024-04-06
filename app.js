@@ -25,45 +25,21 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(cor())
 //router
-const prefix = '/v1/Backend-Maruey'
+const prefix = '/v1/BackendProduct'
 app.use(prefix+'/', require('./routes/index'));
-//ผู้ใช้งาน
-app.use(prefix+'/admin',require('./routes/admin/admin'))
 //ล็อคอิน
-app.use(prefix+'/login',require('./routes/login/login'))
-//partner คู่ค้า
-app.use(prefix+'/partner',require('./routes/partner/partner'))
+app.use(prefix+'/login', require('./routes/login'));
 
 //สินค้า
-app.use(prefix+'/product',require('./routes/product/product'))
-//หมวดหมู่สินค้า
-app.use(prefix+'/category',require('./routes/product/category'))
-//หมวดหมู่สินค้าย่อย
-app.use(prefix+'/type',require('./routes/product/type'))
+app.use(prefix+'/product', require('./routes/product'));
 
-//สัญญา partner
-app.use(prefix+'/partnercontract',require('./routes/contract/partnercontract'))
+//ลูกค้า
+app.use(prefix+'/user', require('./routes/user'));
 
-//ข้อมูลลูกค้า
-app.use(prefix+'/customer',require('./routes/customer/customer'))
+//รีวิว
+app.use(prefix+'/review', require('./routes/review'));
 
-//เปอร์เซ็นต์กำไร
-app.use(prefix+'/percentprofit',require('./routes/percentprofit/percentprofit'))
 
-//คำร้องขอฝากขายสินค้า
-app.use(prefix+'/requestproduct',require('./routes/product/requestproduct'))
-
-//ออเดอร์
-app.use(prefix+'/order',require('./routes/order/order'))
-
-// ใบจัดส่ง
-app.use(prefix+'/delivery',require('./routes/order/delivery'))
-
-//ข้อมูลพื้นฐาน
-app.use(prefix+'/information',require('./routes/information/information'))
-
-//ข้อมูลรายได้
-app.use(prefix+'/shareincome',require('./routes/shareincome/shareincome'))
 
 
 
