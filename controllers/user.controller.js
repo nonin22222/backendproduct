@@ -24,8 +24,19 @@ module.exports.getUserById = async (req, res) => {
 //แก้ไขข้อมูล user
 module.exports.updateUser = async (req, res) => {
     try {
-        const user = await User.findByIdAndUpdate(req.params.id, req.body, { new: true })
-        return res.status(200).send({ status: true, data: user })
+        
+        const userdata = await User.findById(req.params.id)
+        if(!userdata)   return res.status(404).send({ status: false, message: "ไม่พบข้อมูล user นี้" })
+
+        const data ={
+            username:req.body.username,
+            password: (req.body.password != null &&req.body.password !=undefined? await bcrypt.hash(req.body.password,8):userdata.password) ,
+            name:req.body.name,
+            position:req.body.position
+        }
+
+        const user = await User.findByIdAndUpdate(req.params.id,data , { new: true })
+        return res.status(200).send({ status: true,message:"ล็อคอินสำเร็จ", data: user })
     }
     catch (error) {
         return res.status(500).send({ status: false, error: error.message });

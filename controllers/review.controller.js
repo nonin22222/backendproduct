@@ -4,9 +4,10 @@ const Review = require('../models/review.schema');
 module.exports.add = async (req, res) => {
     try {
         const data = new Review({
-            name: req.body.name,
-            review: req.body.review,
-            rating: req.body.rating,
+            product_id:req.body.product_id,
+            user_id:req.body.user_id,
+            rating:req.body.rating,
+            review:req.body.review,
         });
 
         const add = await data.save();
@@ -25,7 +26,7 @@ module.exports.add = async (req, res) => {
 //ดึงข้อมูลรีวิวทั้งหมด
 module.exports.getAllReview = async (req, res) => {
     try {
-        const review = await Review.find()
+        const review = await Review.find().populate('product_id').populate('user_id')
         return res.status(200).send({ status: true, data: review })
     } catch (error) {
         return res.status(500).send({ status: false, error: error.message });
@@ -35,7 +36,7 @@ module.exports.getAllReview = async (req, res) => {
 //ดึงข้อมูลรีวิว by id
 module.exports.getReviewById = async (req, res) => {
     try {
-        const review = await Review.findById(req.params.id)
+        const review = await Review.findById(req.params.id).populate('product_id').populate('user_id')
         return res.status(200).send({ status: true, data: review })
     }
     catch (error) {

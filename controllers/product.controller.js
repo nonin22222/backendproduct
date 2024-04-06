@@ -112,7 +112,7 @@ module.exports.updateProduct = async (req, res) => {
           detail: req.body.detail,
           image: (image !='' ?  image:product.image),
         }
-        const update = await Product.findByIdAndUpdate(req.body.id, data, { new: true })
+        const update = await Product.findByIdAndUpdate(req.params.id, data, { new: true })
         return res.status(200).send({ status: true, data: update })
   
     });

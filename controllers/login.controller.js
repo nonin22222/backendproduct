@@ -107,10 +107,11 @@ module.exports.register = async (req, res) => {
       const newUser = new User({
           username:username,
           password:hashpassword,
-          name:name
+          name:name,
+          position:"customer"
       })
-      await newUser.save()
-      return res.status(200).send({ status: true, message: "สมัครสมาชิกสำเร็จ"})
+      const add = await newUser.save()
+      return res.status(200).send({ status: true,data:add,message: "สมัครสมาชิกสำเร็จ"})
 
     } catch (error) {
       return res.status(500).send({status:false,error:error.message});

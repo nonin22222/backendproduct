@@ -5,7 +5,7 @@ const userAuth = require('../authentication/userAuth')
 
 
 //ล็อคอิน
-router.post('/login',login.login)
+router.post('/',login.login)
 
 // get me
 router.get('/getme',login.getme)
